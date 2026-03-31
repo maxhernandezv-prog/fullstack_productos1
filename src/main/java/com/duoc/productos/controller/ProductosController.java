@@ -2,7 +2,9 @@ package com.duoc.productos.controller;
 
 import com.duoc.productos.model.Productos;
 import com.duoc.productos.service.ProductosService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,8 +17,12 @@ public class ProductosController {
     private ProductosService productosService;
 
     @PostMapping
-    public ResponseEntity<Productos> guardar(@RequestBody Productos productos){
-        return ResponseEntity.status(201).body(productosService.guardar(productos));
+    public ResponseEntity<Productos> guardar(@Valid @RequestBody Productos productos){
+        try{
+            return ResponseEntity.status(201).body(productosService.guardar(productos));
+        }catch (Exception e){
+            return new ResponseEntity("Error al crear producto", HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping
