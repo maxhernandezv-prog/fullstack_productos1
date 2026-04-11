@@ -1,5 +1,7 @@
 package com.duoc.productos.controller;
 
+import com.duoc.productos.dto.ProductoDTO;
+import com.duoc.productos.dto.ProductosRequest;
 import com.duoc.productos.model.Productos;
 import com.duoc.productos.service.ProductosService;
 import jakarta.validation.Valid;
@@ -17,7 +19,7 @@ public class ProductosController {
     private ProductosService productosService;
 
     @PostMapping
-    public ResponseEntity<Productos> guardar(@Valid @RequestBody Productos productos){
+    public ResponseEntity<ProductoDTO> guardar(@Valid @RequestBody ProductosRequest productos){
         try{
             return ResponseEntity.status(201).body(productosService.guardar(productos));
         }catch (Exception e){
@@ -25,6 +27,7 @@ public class ProductosController {
         }
     }
 
+    /*
     @GetMapping
     public ResponseEntity<List<Productos>> listar(){
         return ResponseEntity.status(200).body(productosService.listar());
@@ -45,4 +48,6 @@ public class ProductosController {
         productosService.eliminar(id);
         return ResponseEntity.status(200).body("Producto eliminado");
     }
+
+     */
 }

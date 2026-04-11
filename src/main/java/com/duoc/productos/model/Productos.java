@@ -1,27 +1,29 @@
 package com.duoc.productos.model;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.AnyDiscriminatorImplicitValues;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table(name = "productos")
 public class Productos {
 
-    @Positive(message = "Debe ser mayor a cero")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull(message = "no puede ser nulo")
-    @NotBlank(message = "no puede estar vacio")
+    @Column(nullable = false)
     private String nombre;
 
-    @Positive(message = "Debe ser mayor a cero")
-    private int cantidad;
+    private Integer cantidad;
 
-    @Positive(message = "Debe ser mayor a cero")
     private Integer precio;
 }
